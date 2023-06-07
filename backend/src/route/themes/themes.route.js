@@ -6,7 +6,7 @@ module.exports = function (app) {
   app.get("/themes/list", authMiddleware.auth, themesController.listar);
   app.get(
     "/themes/buscarPorCodigo/:filtro",
-    authMiddleware.auth,
+   authMiddleware.auth,
     themesController.busquedaPorCodigo
   );
   app.post("/themes/update", authMiddleware.auth, themesController.actualizar);
