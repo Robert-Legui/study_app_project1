@@ -1,0 +1,74 @@
+<ion-router-outlet></ion-router-outlet>
+<ion-header [translucent]="true">
+
+  <ion-toolbar>
+    <ion-title>Study App</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-title>Inicio</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+ 
+
+ 
+    
+<ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+<ion-content [fullscreen]="true" *ngIf="temas">
+
+   <!-- Buscador --->
+   <ion-searchbar></ion-searchbar>
+
+   <ion-card-header>
+    <ion-card-title>Temas:</ion-card-title>
+  </ion-card-header>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button [routerLink]="'/theme-list'">
+        <ion-icon name="document-text-outline"></ion-icon>
+        Temas
+      </ion-tab-button>
+      <ion-tab-button [routerLink]="'/user-list'">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        Usuarios
+      </ion-tab-button>
+      <ion-tab-button [routerLink]="'/topico-list'">
+        <ion-icon name="folder-open-outline"></ion-icon>
+        Topicos
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  <ion-card>
+    <ion-accordion-group>
+      <ion-accordion *ngFor="let tema of temas">
+        <ion-item slot="header" color="light">
+          <ion-label
+            >{{tema.id}} - {{tema.name}} - {{tema.description}}</ion-label
+          >
+        </ion-item>
+
+        <div class="ion-padding" slot="content">First Content</div>
+        <div class="ion-padding" slot="content">First Content</div>
+        <div class="ion-padding" slot="content">
+          <ion-icon slot="end" size="large" name="add-circle"></ion-icon>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </ion-card>
+
+   <!-- Contenido -->
+   <ion-card>
+    
+
+    <ion-card-content>
+      <p>Aquí puedes agregar el contenido relacionado con el tema seleccionado.</p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

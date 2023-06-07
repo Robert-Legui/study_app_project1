@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [text]="getBackButtonText()"
+        defaultHref="/"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title> Temas </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="temas">
+  <ion-card>
+  <ion-list>
+    <!-- NOMBRE Y DESCRIPCION DEL TEMA-->
+    <ion-item *ngFor="let tema of temas">
+      <ion-label [routerLink]="'/theme-edit/'+tema.id"
+        >{{tema.id}} - {{tema.name}} - {{tema.description}}</ion-label
+      >
+      <!-- EDITAR TEMA-->
+      <ion-icon
+        slot="end"
+        name="create"
+        [routerLink]="'/theme-edit/'
+        +
+        tema.id"
+      ></ion-icon>
+
+      <!-- ELIMINAR TEMA-->
+      <ion-icon (click)="confirmDelete(tema.id)"  slot="end" name="trash"> </ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-card>
+
+  <!-- AGREGAR TEMA-->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button [routerLink]="'/theme-edit/0'">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
