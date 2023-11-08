@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [text]="getBackButtonText()"
+        defaultHref="/"
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="themeproperties">
+  <ion-item>
+    <ion-icon name="library-outline" color="primary"></ion-icon>
+    <ion-label class="ion-text-wrap">
+      <h2>{{accion}}</h2>
+      <ion-list>
+        <ion-item>
+          <ion-input
+            label="Nombre"
+            placeholder="Nombre"
+            [(ngModel)]="themeproperties.property_name"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            label="Valor"
+            placeholder="Valor"
+            [(ngModel)]="themeproperties.property_value"
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-label>
+  </ion-item>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="saveThemeProperty()">
+      <ion-icon name="save-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

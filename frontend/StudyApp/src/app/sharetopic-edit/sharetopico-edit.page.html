@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [text]="getBackButtonText()"
+        defaultHref="/"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{theme_prop_name}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" >
+  <ion-item>
+    <!-- <ion-icon
+      aria-hidden="true"
+      name="pricetags-outline"
+      color="primary"
+    ></ion-icon> -->
+    <ion-label class="ion-text-wrap">
+      <h2>{{accion}}</h2>
+      <ion-list>
+        <ion-item>
+          <ion-input
+            label="Email"
+            placeholder="Email"
+            [(ngModel)]="ShareTopic.email"
+          ></ion-input>
+        </ion-item>
+        <ion-button (click)="validarEmail()" expand="full" color="success">Validar email</ion-button>
+        <br>
+        <ion-item>
+          <ion-input
+            label="Nombre"
+            placeholder="Nombre"
+            [(ngModel)]="ShareTopic.name"
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-label>
+  </ion-item>
+    <ion-fab slot="fixed" vertical="bottom" horizontal="center" *ngIf="user_id">
+      <ion-fab-button (click)="saveTopic()">
+        <ion-icon name="save-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+</ion-content>

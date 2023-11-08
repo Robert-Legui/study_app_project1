@@ -1,0 +1,84 @@
+
+
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [text]="getBackButtonText()"
+        defaultHref="/"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{theme_prop_name}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="Topico">
+  <ion-item>
+    <!-- <ion-icon
+      aria-hidden="true"
+      name="pricetags-outline"
+      color="primary"
+    ></ion-icon> -->
+    <ion-label class="ion-text-wrap">
+      <h2>{{accion}}</h2>
+      <ion-list>
+        <ion-item>
+          <ion-input
+            label="Nombre"
+            placeholder="Nombre"
+            [(ngModel)]="Topico.name"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            type="number"
+            label="% Completado"
+            [(ngModel)]="Topico.prc_completed"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-checkbox 
+          justify="start"
+          [(ngModel)]="Topico.priority"
+          >Fijar</ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-textarea 
+            labelPlacement="stacked" 
+            label="Su comentario" 
+            placeholder="Comentario"
+            [autoGrow]="true"
+            [(ngModel)]="Topico.comment"
+          ></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="color-palette-outline" slot="start"></ion-icon>
+          <ion-input
+            (colorPickerChange)="captureColour($event)"
+            [style.background]="color" 
+            [(colorPicker)]="color" 
+            [cpOKButton]="true"
+            [cpOutputFormat]="'rgba'"
+          >
+          
+        </ion-input>
+        </ion-item>
+        <ion-button expand="block" (click)="copytext(link)" *ngIf="id!=='0'">Copiar enlace <ion-icon name="clipboard" slot="start" ></ion-icon></ion-button>
+
+        <!-- <div class="palette" #palette></div> -->
+      </ion-list>
+    </ion-label>
+  </ion-item>
+    <ion-fab slot="fixed" vertical="bottom" horizontal="center">
+      
+      <ion-fab-button [routerLink]="'/sharetopico-edit/0/'+theme_id+'/'+theme_prop_id+'/'+id" *ngIf="Topico.owner_user_id==userId" color="success">
+        <ion-icon name="share"></ion-icon>
+      </ion-fab-button>
+      <br>
+      <ion-fab-button (click)="saveTopic()">
+        <ion-icon name="save-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+</ion-content>

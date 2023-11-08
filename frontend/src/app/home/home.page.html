@@ -1,0 +1,57 @@
+<ion-router-outlet></ion-router-outlet>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Study App</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSesion()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+<ion-content [fullscreen]="true" *ngIf="temas">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button [routerLink]="'/topic-list'">
+        <ion-icon name="document-text-outline"></ion-icon>
+        Topicos
+      </ion-tab-button>
+      <ion-tab-button [routerLink]="'/theme-list'">
+        <ion-icon name="document-text-outline"></ion-icon>
+        Temas
+      </ion-tab-button>
+      <ion-tab-button [routerLink]="'/user-list'">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        Usuarios
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  <ion-card>
+    <ion-accordion-group>
+      <!-- Impresion de tema -->
+      <ion-accordion *ngFor="let tema of temas">
+        <ion-item slot="header" color="light">
+          <ion-label
+            >{{tema.id}} - {{tema.name}} - {{tema.description}}</ion-label
+          >
+        </ion-item>
+        <!-- Impresion de propiedades del tema -->
+        <div *ngFor="let tema_propiedad of temas_propiedades" slot="content">
+          <label *ngIf="tema_propiedad.theme_id===tema.id" class="ion-padding">
+            {{tema_propiedad.theme_id}} - {{tema_propiedad.property_name}}
+          </label>
+        </div>
+
+        <!-- Boton para agregar propiedad -->
+        <div class="ion-padding" slot="content">
+          <ion-icon slot="end" size="large" name="add-circle"></ion-icon>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </ion-card>
+</ion-content>

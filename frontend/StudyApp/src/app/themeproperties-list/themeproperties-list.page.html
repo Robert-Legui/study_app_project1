@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [text]="getBackButtonText()"
+        defaultHref="/home"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title> Temas </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true" *ngIf="themesProperties">
+  <ion-card>
+  <ion-list>
+    <!-- NOMBRE Y DESCRIPCION DEL TEMA-->
+    <ion-item *ngFor="let themeProperty of themesProperties">
+      <ion-label [routerLink]="'/themeproperties-edit/'+ themeProperty.id"
+        >{{themeProperty.id}} - {{themeProperty.property_name}} - {{themeProperty.property_value}}</ion-label
+      >
+      <!-- EDITAR TEMA-->
+      <ion-icon
+        slot="end"
+        name="create"
+        [routerLink]="'/themeproperties-edit/'
+        +
+        themeProperty.id"
+      ></ion-icon>
+
+      <!-- ELIMINAR TEMA-->
+      <ion-icon (click)="confirmDelete(themeProperty.id)"  slot="end" name="trash">
+
+      </ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-card>
+
+  <!-- AGREGAR TEMA-->
+  <ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
+    <ion-fab-button [routerLink]="'/themeproperties-edit/0'">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button [routerLink]="'/themeproperties-list'">
+        <ion-icon name="document-text-outline"></ion-icon>
+        Temas
+      </ion-tab-button>
+      <ion-tab-button [routerLink]="'/user-list'">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        Usuarios
+      </ion-tab-button>
+      <ion-tab-button [routerLink]="'/topico-list'">
+        <ion-icon name="folder-open-outline"></ion-icon>
+        Topicos
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs> -->
+</ion-content>

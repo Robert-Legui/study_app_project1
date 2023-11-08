@@ -1,0 +1,64 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [text]="getBackButtonText()"
+        defaultHref="/home"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title> Usuarios </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="usuarios">
+  <ion-card>
+    <ion-list>
+      <!-- NOMBRE Y APELLIDO DEL USUARIO-->
+      <ion-item *ngFor="let usuario of usuarios">
+        <ion-label [routerLink]="'/user-edit/'+usuario.id"
+          >{{usuario.id}} - {{usuario.name}} - {{usuario.last_name}}</ion-label
+        >
+        <!-- EDITAR USUARIO-->
+
+        <ion-icon
+          slot="end"
+          name="create"
+          [routerLink]="'/user-edit/'
+        +
+        usuario.id
+        +
+        '/list'
+        "
+        ></ion-icon>
+
+        <!-- ELIMINAR USUARIO-->
+        <ion-icon (click)="confirmDelete(usuario.id)" slot="end" name="trash">
+        </ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <!-- <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button [routerLink]="'/theme-list'">
+        <ion-icon name="document-text-outline"></ion-icon>
+        Temas
+      </ion-tab-button>
+      <ion-tab-button [routerLink]="'/user-list'">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        Usuarios
+      </ion-tab-button>
+      <ion-tab-button [routerLink]="'/topico-list'">
+        <ion-icon name="folder-open-outline"></ion-icon>
+        Topicos
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs> -->
+
+  <!-- AGREGAR USUARIO-->
+  <!-- <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button [routerLink]="'/user-edit/0'">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+</ion-content>

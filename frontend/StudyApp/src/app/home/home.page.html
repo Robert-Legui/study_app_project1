@@ -1,0 +1,117 @@
+<ion-router-outlet></ion-router-outlet>
+<ion-header [translucent]="true">
+
+  <ion-toolbar>
+      <ion-title>Study App</ion-title>
+      <ion-buttons slot="start" *ngIf="usuario.admin">
+        <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-title>Inicio</ion-title>
+    <ion-button *ngIf="!usuario.admin" slot="end" color="danger" (click)="logOut()"><ion-icon name="log-out-outline"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+ 
+
+ 
+    
+
+<ion-content [fullscreen]="true" *ngIf="temas">
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+   <!-- Buscador --->
+   <ion-searchbar
+              placeholder="Buscar"
+              [(ngModel)]="buscar"
+              showCancelButton="focus"
+              animated></ion-searchbar>
+
+   <ion-card-header>
+    <ion-card-title>Mis Temas:</ion-card-title>
+  </ion-card-header>
+
+  
+  <ion-card>
+    <ion-accordion-group>
+      <ion-accordion *ngFor="let tema of temas | filter:buscar">
+        <ion-item slot="header" color="light">
+          <ion-label >
+            {{tema.id}} - {{tema.name}} - {{tema.description}}
+          </ion-label>
+        </ion-item>
+
+        <ion-list slot="content" *ngFor="let themeProperty of tema.ThemesProperties">
+          <ion-item >
+            <ion-label class="ion-padding" [routerLink]="'/topico-list/'+tema.id+'/'+themeProperty.id">{{themeProperty.id}} - {{themeProperty.property_name}}</ion-label>
+            <!-- EDITAR USUARIO-->
+
+            <ion-icon
+            *ngIf="usuario.admin"
+            slot="end"
+            name="create"
+            [routerLink]="'/themeproperties-edit/'+tema.id+'/'+themeProperty.id"
+            ></ion-icon>
+
+            <!-- ELIMINAR USUARIO-->
+            <ion-icon (click)="confirmDeleteProp(themeProperty.id,tema.id)" slot="end" name="trash" *ngIf="usuario.admin">
+            </ion-icon>
+            </ion-item>
+        </ion-list>
+
+          <!-- <div class="ion-padding" slot="content">First Content</div>
+          <div class="ion-padding" slot="content">First Content</div> -->
+          <div class="ion-padding" slot="content" *ngIf="usuario.admin">
+            <ion-button fill="clear" color="dark" [routerLink]="'/themeproperties-edit/'+tema.id+'/0'">
+            <!-- <ion-button fill="clear" color="dark" (click)="addThemeProperty(tema.id)"> -->
+              <ion-icon slot="end" name="add-circle"></ion-icon>
+              Propiedad del Tema
+            </ion-button>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+      <ion-button fill="clear" color="dark" [routerLink]="'/theme-edit/0'" *ngIf="usuario.admin">
+        Tema
+        <ion-icon slot="end" name="add-circle"></ion-icon>
+      </ion-button>
+  </ion-card>
+
+   <!-- Contenido -->
+   <!-- <ion-card>
+    <ion-card-content> -->
+      <!-- <div class="ion-padding" slot="content">
+        <ion-button fill="clear" color="dark" [routerLink]="'/theme-edit/0'"> -->
+        <!-- <ion-button fill="clear" color="dark" (click)="addThemeProperty(tema.id)"> -->
+          <!-- <ion-icon slot="end" name="add-circle"></ion-icon>
+          Agregar Tema
+        </ion-button>
+      </div> -->
+      <!-- <p>Aquí puedes agregar el contenido relacionado con el tema seleccionado.</p> -->
+    <!-- </ion-card-content>
+  </ion-card> -->
+
+  
+
+</ion-content>
+
+<!-- <ion-footer>
+  <div>
+    <ion-tabs *ngIf="usuario.admin">
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button [routerLink]="'/theme-list'">
+          <ion-icon name="document-text-outline"></ion-icon>
+          Temas
+        </ion-tab-button>
+        <ion-tab-button [routerLink]="'/user-list'">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          Usuarios
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </div>
+</ion-footer> -->
+

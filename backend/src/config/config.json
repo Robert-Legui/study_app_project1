@@ -1,0 +1,10 @@
+{
+    "development": {
+        "username": "postgres",
+        "password": "nestor210505",
+        "database": "bd_study_app",
+        "host": "localhost",
+        "dialect": "postgres",
+        "operatorsAliases": false
+    }
+}
