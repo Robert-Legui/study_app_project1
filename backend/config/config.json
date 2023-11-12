@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "nestor210505",
+    "password": "admin",
     "database": "bd_study_app",
     "host": "127.0.0.1",
     "dialect": "postgres"
